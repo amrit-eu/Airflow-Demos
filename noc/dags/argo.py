@@ -34,7 +34,7 @@ with DAG(
         task_id="list-amrit",
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=["sh", "-c"],
-        arguments=["ls -lsarth /amrit"],
+        arguments=["ls -lsarth /mnt/amrit"],
         env_vars=environment.nocl_matlab,
         container_security_context=security.devargo,
         volumes=[volumes.devargo],
@@ -62,6 +62,7 @@ with DAG(
         volume_mounts=[
             mounts.argo,
             mounts.devargo,
+            mounts.devargo_amrit,
             *mounts.modules
         ]
     )

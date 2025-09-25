@@ -14,7 +14,7 @@ devargo = V1VolumeMount(
 devargo_amrit = V1VolumeMount(
     name="devargo",
     sub_path="amrit",
-    mount_path="/amrit",
+    mount_path="/mnt/amrit",
     read_only=False
 )
 
