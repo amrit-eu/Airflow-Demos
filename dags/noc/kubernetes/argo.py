@@ -4,7 +4,9 @@ from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperato
 from kubernetes.client.models import (
     V1VolumeMount,
     V1Volume,
-    V1PodSecurityContext
+    V1SecurityContext,
+    V1Capabilities,
+    V1PersistentVolumeClaimVolumeSource,
 )
 
 
@@ -34,7 +36,13 @@ with DAG(
         image="debian",
         cmds=["bash", "-cx"],
         arguments=["ls -lsarth /users/devargo"],
-        security_context=V1PodSecurityContext(
+        container_security_context=V1SecurityContext(
+            allow_privilege_escalation=False,
+            capabilities=V1Capabilities(
+                drop=["ALL"]
+            ),
+            privileged=False,
+            read_only_root_filesystem=True,
             run_as_non_root=True,
             run_as_user=18685,
             run_as_group=18002
@@ -42,9 +50,10 @@ with DAG(
         volumes=[
             V1Volume(
                 name="devargo",
-                persistent_volume_claim={
-                    "claim_name": "nocl-scale-bodc2-users-devargo-airflow",
-                }
+                persistent_volume_claim=V1PersistentVolumeClaimVolumeSource(
+                    claim_name="nocl-scale-bodc2-users-devargo-airflow",
+                    read_only=True
+                )
             )
         ],
         volume_mounts=[
