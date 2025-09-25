@@ -1,9 +1,10 @@
 from airflow import DAG
 from datetime import datetime
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
-from kubernetes.client.models import V1VolumeMount, V1Volume, V1PersistentVolumeClaimSource
-
-
+from kubernetes.client.models import (
+    V1VolumeMount,
+    V1Volume
+)
 
 
 with DAG(
@@ -41,10 +42,10 @@ with DAG(
         volumes=[
             V1Volume(
                 name="devargo",
-                persistent_volume_claim=PersistentVolumeClaimVolumeSource(
-                    claim_name="nocl-scale-bodc2-users-devargo-airflow",
-                    read_only=True
-                )
+                persistent_volume_claim={
+                    "claim_name": "nocl-scale-bodc2-users-devargo-airflow",
+                    "read_only": True
+                }
             )
         ],
         volume_mounts=[
