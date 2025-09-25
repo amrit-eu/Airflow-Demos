@@ -4,9 +4,9 @@ __all__ = ["devargo"]
 
 devargo = V1SecurityContext(
     allow_privilege_escalation=False,
-    capabilities=V1Capabilities(
-        drop=["ALL"]
-    ),
+    # capabilities=V1Capabilities(
+    #     drop=["ALL"]
+    # ),
     privileged=False,
     run_as_non_root=True,
     run_as_user=18685,
