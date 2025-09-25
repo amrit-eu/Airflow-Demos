@@ -4,7 +4,7 @@ from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperato
 from util import mounts, environment, security, volumes
 
 with DAG(
-        "argo_hello",
+        "argo_example",
         schedule="* * * * *",
         start_date=datetime.today(),
         catchup=False
