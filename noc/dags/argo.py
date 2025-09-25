@@ -66,7 +66,7 @@ with DAG(
             "-batch"
         ],
         arguments=["version"],
-        env_vars=environment.DEFAULT,
+        env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
         volumes=[
             volumes.ARGO,

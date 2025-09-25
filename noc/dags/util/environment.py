@@ -18,3 +18,10 @@ DEFAULT = [
         value="27000@livlic8.noc.ac.uk"
     )
 ]
+
+DECODER = [
+    V1EnvVar(
+        name="MCRROOT",
+        value="/lmod/modules/apps/matlab/2022b"
+    )
+]
