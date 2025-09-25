@@ -60,7 +60,7 @@ with DAG(
         task_id="list_runtime",
         image=images.DECODER,
         cmds=["bash", "-xec"],
-        arguments=["ls -lsarth ${MCRROOT}"],
+        arguments=["ls -lsarth ${MCRROOT}/*"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
         volumes=volumes.MODULES,
