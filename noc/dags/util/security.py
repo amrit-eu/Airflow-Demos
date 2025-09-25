@@ -8,7 +8,6 @@ devargo = V1SecurityContext(
         drop=["ALL"]
     ),
     privileged=False,
-    read_only_root_filesystem=True,
     run_as_non_root=True,
     run_as_user=18685,
     run_as_group=18002

@@ -26,8 +26,8 @@ with DAG(
         task_id="pod_goodbye"
     )
     list_files = KubernetesPodOperator(
-        name="list-files",
-        task_id="list_files",
+        name="call-matlab",
+        task_id="call_matlab",
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=[
             "/lmod/modules/apps/matlab/2024b/bin/matlab",
