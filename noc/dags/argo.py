@@ -9,23 +9,39 @@ with DAG(
         start_date=datetime.today(),
         catchup=False
 ) as dag:
-    say_hello = KubernetesPodOperator(
-        name="hello-pod",
-        image="debian",
-        cmds=["bash", "-cx"],
-        arguments=["echo Hello World"],
+    list_argo = KubernetesPodOperator(
+        name="list-argo",
+        task_id="list-argo",
+        image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
+        cmds=["sh", "-c"],
+        arguments=["ls -lsarth /users/argo"],
         container_security_context=security.devargo,
-        task_id="pod_hello"
+        volumes=[volumes.argo],
+        volume_mounts=[mounts.argo]
     )
-    say_goodbye = KubernetesPodOperator(
-        name="goodbye-pod",
-        image="debian",
-        cmds=["bash", "-cx"],
-        arguments=["echo Goodbye World"],
+    list_devargo = KubernetesPodOperator(
+        name="list-devargo",
+        task_id="list-devargo",
+        image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
+        cmds=["sh", "-c"],
+        arguments=["ls -lsarth /users/devargo"],
         container_security_context=security.devargo,
-        task_id="pod_goodbye"
+        volumes=[volumes.devargo],
+        volume_mounts=[mounts.devargo]
     )
-    list_files = KubernetesPodOperator(
+    list_amrit = KubernetesPodOperator(
+        name="list-amrit",
+        task_id="list-amrit",
+        image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
+        cmds=["sh", "-c"],
+        arguments=["ls -lsarth /amrit"],
+        env_vars=environment.nocl_matlab,
+        container_security_context=security.devargo,
+        volumes=[volumes.devargo],
+        volume_mounts=[mounts.devargo_amrit]
+    )
+
+    call_matlab = KubernetesPodOperator(
         name="call-matlab",
         task_id="call_matlab",
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
@@ -50,4 +66,4 @@ with DAG(
         ]
     )
 
-    say_hello >> say_goodbye >> list_files
+    list_argo >> list_devargo >> list_amrit >> call_matlab
