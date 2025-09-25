@@ -96,7 +96,7 @@ with DAG(
         arguments=["version"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[volumes.ARGO, volumes.MODULES ]
+        volumes=[volumes.ARGO, volumes.MODULES],
         volume_mounts=mounts.MODULES
     )
 
