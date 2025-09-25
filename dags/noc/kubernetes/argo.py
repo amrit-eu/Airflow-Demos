@@ -3,7 +3,8 @@ from datetime import datetime
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
 from kubernetes.client.models import (
     V1VolumeMount,
-    V1Volume
+    V1Volume,
+    V1PodSecurityContext
 )
 
 
@@ -33,18 +34,16 @@ with DAG(
         image="debian",
         cmds=["bash", "-cx"],
         arguments=["ls -lsarth /users/devargo"],
-        security_context={
-            "privileged": False,
-            "capabilities": {
-                "drop": ["ALL"]
-            }
-        },
+        security_context=V1PodSecurityContext(
+            run_as_non_root=True,
+            run_as_user=18685,
+            run_as_group=18002
+        ),
         volumes=[
             V1Volume(
                 name="devargo",
                 persistent_volume_claim={
                     "claim_name": "nocl-scale-bodc2-users-devargo-airflow",
-                    "read_only": True
                 }
             )
         ],
