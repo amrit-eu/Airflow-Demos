@@ -1,8 +1,8 @@
 from kubernetes.client.models import V1SecurityContext, V1Capabilities
 
-__all__ = ["devargo"]
+__all__ = ["DEVARGO"]
 
-devargo = V1SecurityContext(
+DEVARGO = V1SecurityContext(
     allow_privilege_escalation=False,
     capabilities=V1Capabilities(
         drop=["ALL"]

@@ -1,7 +1,8 @@
 from kubernetes.client.models import V1EnvVar
 
+__all__ = ["DEFAULT"]
 
-default = [
+DEFAULT = [
     V1EnvVar(
         name="TZ",
         value="Europe/London"

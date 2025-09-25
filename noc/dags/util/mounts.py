@@ -1,18 +1,20 @@
 from kubernetes.client.models import V1VolumeMount
 
-argo = V1VolumeMount(
+__all__ = ["ARGO", "DEVARGO", "MODULES"]
+
+ARGO = V1VolumeMount(
     name="argo",
     mount_path="/users/argo",
     read_only=True
 )
 
-devargo = V1VolumeMount(
+DEVARGO = V1VolumeMount(
     name="devargo",
     mount_path="/users/devargo",
     read_only=False
 )
 
-modules = [
+MODULES = [
     V1VolumeMount(
         name="module-apptainer",
         mount_path="/apptainer",
