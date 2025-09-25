@@ -63,8 +63,8 @@ with DAG(
         arguments=["ls -lsarth ${MCRROOT}"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[volumes.DEVARGO],
-        volume_mounts=[mounts.DEVARGO]
+        volumes=[volumes.MODULES],
+        volume_mounts=mounts.MODULES
     )
 
     call_matlab = KubernetesPodOperator(
@@ -80,19 +80,9 @@ with DAG(
         arguments=["version"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[
-            volumes.ARGO,
-            volumes.DEVARGO,
-            *volumes.MODULES
-        ],
-        volume_mounts=[
-            mounts.ARGO,
-            mounts.DEVARGO,
-            *mounts.MODULES
-        ]
+        volumes=[volumes.MODULES],
+        volume_mounts=mounts.MODULES
     )
-
-
 
     list_argo >> list_devargo >> write_amrit >> read_amrit
     list_argo >> list_runtime >> call_matlab
