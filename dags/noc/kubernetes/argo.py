@@ -42,7 +42,6 @@ with DAG(
             V1Volume(
                 name="devargo",
                 persistent_volume_claim="nocl-scale-bodc2-users-devargo-airflow",
-                read_only=True
             )
         ],
         volume_mounts=[
