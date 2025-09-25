@@ -2,4 +2,4 @@ from typing import Final
 
 __all__ = ["DECODER"]
 
-DECODER: Final[str] = "ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a"
+DECODER: Final[str] = "docker-repo.bodc.me/jamclar/amrit/decoder_matlab_tool:latest"
