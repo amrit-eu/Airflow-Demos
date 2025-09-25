@@ -17,11 +17,11 @@ with DAG(
         task_id="pod_hello"
     )
     say_goodbye = KubernetesPodOperator(
-        name="hello-pod",
+        name="goodbye-pod",
         image="debian",
         cmds=["bash", "-cx"],
         arguments=["echo", "Goodbye World!"],
-        task_id="pod_hello"
+        task_id="pod_goodbye"
     )
 
     say_hello >> say_goodbye
