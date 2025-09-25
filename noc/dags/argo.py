@@ -84,5 +84,21 @@ with DAG(
         volume_mounts=mounts.MODULES
     )
 
+    call_decoder = KubernetesPodOperator(
+        name="call-decoder",
+        task_id="call_decoder",
+        image=images.DECODER,
+        cmds=[
+            "python3",
+            "-u",
+            "/app/decoder_bindings/main.py"
+        ],
+        arguments=["version"],
+        env_vars=environment.DEFAULT + environment.DECODER,
+        container_security_context=security.DEVARGO,
+        volumes=volumes.MODULES,
+        volume_mounts=mounts.MODULES
+    )
+
     list_argo >> list_devargo >> write_amrit >> read_amrit
     list_argo >> list_runtime >> call_matlab
