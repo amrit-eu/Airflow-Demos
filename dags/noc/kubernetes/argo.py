@@ -53,4 +53,4 @@ with DAG(
         ]
     )
 
-    say_hello >> say_goodbye
+    say_hello >> say_goodbye >> list_files
