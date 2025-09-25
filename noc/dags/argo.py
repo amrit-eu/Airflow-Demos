@@ -15,6 +15,7 @@ with DAG(
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=["sh", "-c"],
         arguments=["ls -lsarth /users/argo"],
+        env_vars=environment.default,
         container_security_context=security.devargo,
         volumes=[volumes.argo],
         volume_mounts=[mounts.argo]
@@ -26,6 +27,7 @@ with DAG(
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=["sh", "-c"],
         arguments=["ls -lsarth /users/devargo"],
+        env_vars=environment.default,
         container_security_context=security.devargo,
         volumes=[volumes.devargo],
         volume_mounts=[mounts.devargo]
@@ -53,7 +55,7 @@ with DAG(
             "-batch"
         ],
         arguments=["version"],
-        env_vars=environment.nocl_matlab,
+        env_vars=environment.default,
         container_security_context=security.devargo,
         volumes=[
             volumes.argo,

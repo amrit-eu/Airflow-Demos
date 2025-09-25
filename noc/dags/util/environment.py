@@ -1,6 +1,11 @@
 from kubernetes.client.models import V1EnvVar
 
-nocl_matlab = [
+
+default = [
+    V1EnvVar(
+        name="TZ",
+        value="Europe/London"
+    ),
     # Save wasting space on the MathWorks Service Host
     V1EnvVar(
         name="MATHWORKS_SERVICE_HOST_MANAGED_INSTALL_ROOT",
