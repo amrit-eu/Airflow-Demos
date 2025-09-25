@@ -80,4 +80,5 @@ with DAG(
         ]
     )
 
-    list_argo >> list_devargo >> write_amrit >> read_amrit >> call_matlab
+    list_argo >> list_devargo >> write_amrit >> read_amrit
+    list_argo >> call_matlab
