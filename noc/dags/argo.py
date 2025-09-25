@@ -1,7 +1,7 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
-from .util import mounts, environment, security, volumes
+from util import mounts, environment, security, volumes
 
 with DAG(
         "argo_hello",
