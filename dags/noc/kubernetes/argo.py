@@ -13,14 +13,14 @@ with DAG(
         name="hello-pod",
         image="debian",
         cmds=["bash", "-cx"],
-        arguments=["echo", "Hello World!"],
+        arguments=["echo", "Hello World"],
         task_id="pod_hello"
     )
     say_goodbye = KubernetesPodOperator(
         name="goodbye-pod",
         image="debian",
         cmds=["bash", "-cx"],
-        arguments=["echo", "Goodbye World!"],
+        arguments=["echo", "Goodbye World"],
         task_id="pod_goodbye"
     )
 
