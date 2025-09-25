@@ -63,7 +63,7 @@ with DAG(
         arguments=["ls -lsarth ${MCRROOT}"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[volumes.MODULES],
+        volumes=volumes.MODULES,
         volume_mounts=mounts.MODULES
     )
 
@@ -80,7 +80,7 @@ with DAG(
         arguments=["version"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[volumes.MODULES],
+        volumes=volumes.MODULES,
         volume_mounts=mounts.MODULES
     )
 
