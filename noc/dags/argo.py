@@ -55,6 +55,18 @@ with DAG(
         volume_mounts=[mounts.DEVARGO]
     )
 
+    list_runtime = KubernetesPodOperator(
+        name="list-runtime",
+        task_id="list_runtime",
+        image=images.DECODER,
+        cmds=["bash", "-xec"],
+        arguments=["ls -lsarth ${MCRROOT}"],
+        env_vars=environment.DEFAULT + environment.DECODER,
+        container_security_context=security.DEVARGO,
+        volumes=[volumes.DEVARGO],
+        volume_mounts=[mounts.DEVARGO]
+    )
+
     call_matlab = KubernetesPodOperator(
         name="call-matlab",
         task_id="call_matlab",
@@ -80,5 +92,7 @@ with DAG(
         ]
     )
 
+
+
     list_argo >> list_devargo >> write_amrit >> read_amrit
-    list_argo >> call_matlab
+    list_argo >> list_runtime >> call_matlab
