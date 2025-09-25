@@ -1,7 +1,7 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.pod import KubernetesPodOperator
-from noc import security, environment, volumes, mounts
+from .. import security, environment, volumes, mounts
 
 
 with DAG(
