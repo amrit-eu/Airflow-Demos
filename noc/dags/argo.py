@@ -19,6 +19,7 @@ with DAG(
         volumes=[volumes.argo],
         volume_mounts=[mounts.argo]
     )
+
     list_devargo = KubernetesPodOperator(
         name="list-devargo",
         task_id="list-devargo",
@@ -29,16 +30,16 @@ with DAG(
         volumes=[volumes.devargo],
         volume_mounts=[mounts.devargo]
     )
-    list_amrit = KubernetesPodOperator(
-        name="list-amrit",
-        task_id="list-amrit",
+
+    write_amrit = KubernetesPodOperator(
+        name="write-amrit",
+        task_id="write_amrit",
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=["sh", "-c"],
-        arguments=["ls -lsarth /mnt/amrit"],
-        env_vars=environment.nocl_matlab,
+        arguments=["date > /users/devargo/amrit/hello-from-airflow.txt"],
         container_security_context=security.devargo,
         volumes=[volumes.devargo],
-        volume_mounts=[mounts.devargo_amrit]
+        volume_mounts=[mounts.devargo]
     )
 
     call_matlab = KubernetesPodOperator(
@@ -62,9 +63,8 @@ with DAG(
         volume_mounts=[
             mounts.argo,
             mounts.devargo,
-            mounts.devargo_amrit,
             *mounts.modules
         ]
     )
 
-    list_argo >> list_devargo >> list_amrit >> call_matlab
+    list_argo >> list_devargo >> write_amrit >> call_matlab
