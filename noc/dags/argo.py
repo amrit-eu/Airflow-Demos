@@ -38,10 +38,10 @@ with DAG(
         task_id="write_amrit",
         image="ghcr.io/euroargodev/coriolis-data-processing-chain-for-argo-floats-container:066a",
         cmds=["bash", "-xec"],
-        arguments=["date > /users/devargo/amrit/hello-from-airflow.txt"],
+        arguments=["date > /mnt/amrit/hello-from-airflow.txt"],
         container_security_context=security.devargo,
         volumes=[volumes.devargo],
-        volume_mounts=[mounts.devargo]
+        volume_mounts=[mounts.devargo_amrit]
     )
 
     call_matlab = KubernetesPodOperator(

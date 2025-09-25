@@ -9,6 +9,12 @@ argo = V1VolumeMount(
 devargo = V1VolumeMount(
     name="devargo",
     mount_path="/users/devargo",
+    read_only=True
+)
+devargo_amrit = V1VolumeMount(
+    name="devargo",
+    sub_path="amrit",
+    mount_path="/mnt/amrit",
     read_only=False
 )
 
