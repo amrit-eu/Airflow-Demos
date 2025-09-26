@@ -23,6 +23,6 @@ DECODER = [
     # Hint MATLAB R2022b runtime location
     V1EnvVar(
         name="MCRROOT",
-        value="/lmod/modules/apps/matlab/2022b"
+        value="/lmod/modules/apps/matlab/2024b"
     )
 ]
