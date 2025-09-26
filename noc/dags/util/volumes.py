@@ -7,7 +7,7 @@ ARGO = V1Volume(
     name="argo",
     persistent_volume_claim=V1PersistentVolumeClaimVolumeSource(
         claim_name="nocl-scale-bodc2-users-argo-airflow",
-        read_only=True
+        read_only=False
     )
 )
 
