@@ -5,7 +5,7 @@ from util import mounts, environment, security, volumes, images
 
 with DAG(
         "argo_example",
-        schedule="* * * * *",
+        schedule="0 * * * *",
         start_date=datetime.today(),
         catchup=False
 ) as dag:
