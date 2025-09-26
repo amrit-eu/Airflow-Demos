@@ -96,8 +96,8 @@ with DAG(
         arguments=["version"],
         env_vars=environment.DEFAULT + environment.DECODER,
         container_security_context=security.DEVARGO,
-        volumes=[volumes.ARGO] + volumes.MODULES,
-        volume_mounts=[mounts.ARGO] + mounts.MODULES
+        volumes=[volumes.DEVARGO] + volumes.MODULES,
+        volume_mounts=[mounts.ADEVRGO] + mounts.MODULES
     )
 
     list_argo >> list_devargo >> write_amrit >> read_amrit
