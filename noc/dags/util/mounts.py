@@ -5,7 +5,7 @@ __all__ = ["ARGO", "DEVARGO", "MODULES"]
 ARGO = V1VolumeMount(
     name="argo",
     mount_path="/users/argo",
-    read_only=True
+    read_only=False
 )
 
 DEVARGO = V1VolumeMount(
